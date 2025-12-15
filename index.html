@@ -27,6 +27,7 @@
             flex-direction: column; 
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
             overflow: hidden;
+            /* Placeholder background image - replace with actual URL if available */
             background-image: url('https://nomad-digital.squarespace.com/s/TIB_PatiKart_bg2.png');
             background-size: cover;
             background-position: center;
@@ -223,36 +224,8 @@
             background-color: transparent; 
             color: #2c3e50;
         }
-
-        .match-popup {
-            position: absolute;
-            bottom: 110px; 
-            left: 50%;
-            transform: translateX(-50%) translateY(10px); 
-            
-            background-color: rgba(255, 12, 135, 0.95); 
-            color: white;
-            padding: 12px 18px;
-            border-radius: 0.75rem;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-            
-            font-size: 0.85rem;
-            font-weight: 700;
-            text-align: center;
-            line-height: 1.2;
-            max-width: 85%; 
-
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.4s ease, transform 0.4s ease;
-            z-index: 20; 
-        }
-
-        .match-popup.show {
-            opacity: 1;
-            transform: translateX(-50%) translateY(0); 
-            visibility: visible;
-        }
+        
+        /* Eşleşme pop-up'ı kaldırıldı, ilgili CSS kuralları temizlendi. */
 
 
         .message-overlay {
@@ -420,23 +393,22 @@
                 
                 <img id="click-hand" class="click-hand hidden" 
                      src="https://nomad-digital.squarespace.com/s/Robo-Danisman_Click-Hand.png" 
-                     alt=""
+                     alt="Clicking hand icon"
                      onerror="this.src='https://placehold.co/65x65/1132ff/ffffff?text=👆'">
                      
                 <div id="game-board" class="game-board">
-                    </div>
+                    <!-- Kartlar burada JavaScript ile oluşturulur -->
+                </div>
 
             </div>
         </div>
 
-        <div id="match-popup" class="match-popup">
-            <p id="popup-text" class="popup-text"></p>
-        </div>
+        <!-- Eşleşme pop-up'ı kaldırıldı -->
         
         <div id="message-overlay" class="message-overlay">
             <div id="message-image-container" class="message-image-container">
                 <img src="https://nomad-digital.squarespace.com/s/Campaign_Message.png" 
-                     alt="[Image of Campaign Message]"
+                     alt="Campaign Message Image"
                      onerror="this.src='https://placehold.co/320x250/ff0c87/ffffff?text=Mesaj+Görseli+Yüklenemedi'">
             </div>
             <h2 id="overlay-title"></h2>
@@ -445,7 +417,7 @@
                 <img id="replay-button" 
                      class="replay-icon" 
                      src="https://nomad-digital.squarespace.com/s/Banvit_Play-Again.png" 
-                     alt=""
+                     alt="Replay icon"
                      onerror="this.src='https://placehold.co/45x45/1132ff/ffffff?text=🔁'">
                 
                 <button id="discover-button" class="discover-button">Keşfet!</button>
@@ -464,20 +436,15 @@
             'https://nomad-digital.squarespace.com/s/Pati-Kart_Kus.png' 
         ];
 
-        const matchMessages = [
-            null, 
-            "Veteriner ve Petshop ödemelerinize 1.700 TL’ye varan indirim!", 
-            "Veteriner ve Petshop alışverişlerinizde ilave %3* MaxiPuan!", 
-            "Maximum Kart’a sunulan tüm özellikler, kampanya ve ayrıcalıklar Pati Kart'ta!" 
-        ];
+        // Eşleşme mesajları kaldırıldı
         
         let cards = [];
         let flippedCards = [];
         let matchedPairs = 0;
         let canFlip = true;
         
-        let popupTimeout; 
-        const POPUP_DURATION = 1500; 
+        // Pop-up değişkenleri kaldırıldı
+        const WIN_DELAY = 100; // Eşleşme sonrası bekleme süresi
 
         const adContainer = document.querySelector('.ad-container'); 
         const logoElement = document.querySelector('.logo'); 
@@ -488,8 +455,7 @@
         const clickHand = document.getElementById('click-hand'); 
         const messageImageContainer = document.getElementById('message-image-container'); 
         
-        const matchPopup = document.getElementById('match-popup');
-        const popupText = document.getElementById('popup-text');
+        // Pop-up element referansları kaldırıldı
 
         function initGame() {
             flippedCards = [];
@@ -500,12 +466,8 @@
 
             messageOverlay.classList.remove('visible');
             
-            if (popupTimeout) {
-                clearTimeout(popupTimeout);
-                popupTimeout = null;
-            }
-            matchPopup.classList.remove('show');
-
+            // Pop-up temizleme logic'i kaldırıldı
+            
             logoElement.classList.remove('overlay-active');
 
             cards = [...cardImages, ...cardImages]
@@ -525,21 +487,7 @@
             clickHand.classList.remove('hidden');
         }
 
-        function showMatchPopup(message) {
-            if (popupTimeout) {
-                clearTimeout(popupTimeout);
-                matchPopup.classList.remove('show');
-            }
-            
-            popupText.innerHTML = message;
-            
-            matchPopup.classList.add('show');
-            
-            popupTimeout = setTimeout(() => {
-                matchPopup.classList.remove('show');
-                popupTimeout = null; 
-            }, POPUP_DURATION); 
-        }
+        // showMatchPopup fonksiyonu kaldırıldı
 
 
         function createCardElement(cardData) {
@@ -606,9 +554,7 @@
             if (imageUrl1 === imageUrl2) {
                 matchedPairs++;
                 
-                if (matchedPairs > 0 && matchedPairs < matchMessages.length) {
-                    showMatchPopup(matchMessages[matchedPairs]);
-                }
+                // Pop-up mesajı çağırma kaldırıldı
 
                 card1.classList.add('matched');
                 card2.classList.add('matched');
@@ -620,10 +566,10 @@
                 canFlip = true; 
 
                 if (matchedPairs === cardImages.length) { 
+                    // Pop-up bekleme süresi kaldırıldı
                     setTimeout(() => {
-                        matchPopup.classList.remove('show'); 
                         showWinMessage();
-                    }, POPUP_DURATION + 100); 
+                    }, WIN_DELAY); 
                 }
             } else {
                 card1.classList.add('error-flip');
@@ -660,5 +606,4 @@
         window.onload = initGame;
     </script>
 </body>
-
 </html>
